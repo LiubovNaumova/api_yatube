@@ -15,25 +15,21 @@ class Group(models.Model):
 
 class Post(models.Model):
     text = models.TextField()
-    pub_date = models.DateTimeField(
-        'Дата публикации', auto_now_add=True
-    )
+    pub_date = models.DateTimeField("Дата публикации", auto_now_add=True)
     author = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE, 
-        related_name='posts_posts',
-        related_query_name='posts_post'
+        User,
+        on_delete=models.CASCADE,
+        related_name="posts_posts",
+        related_query_name="posts_post",
     )
-    image = models.ImageField(
-        upload_to='posts/', null=True, blank=True
-    )
+    image = models.ImageField(upload_to="posts/", null=True, blank=True)
     group = models.ForeignKey(
-        Group, 
+        Group,
         on_delete=models.SET_NULL,
-        related_name='posts_group_posts', 
-        related_query_name='posts_group_post',
-        blank=True, 
-        null=True
+        related_name="posts_group_posts",
+        related_query_name="posts_group_post",
+        blank=True,
+        null=True,
     )
 
     def __str__(self):
@@ -42,18 +38,13 @@ class Post(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE, 
-        related_name='posts_comments',
-        related_query_name='posts_comment'
+        User,
+        on_delete=models.CASCADE,
+        related_name="posts_comments",
+        related_query_name="posts_comment",
     )
     post = models.ForeignKey(
-        Post, 
-        on_delete=models.CASCADE, 
-        related_name='posts_comments'
+        Post, on_delete=models.CASCADE, related_name="posts_comments"
     )
     text = models.TextField()
-    created = models.DateTimeField(
-        'Дата добавления', auto_now_add=True, db_index=True
-    )
-    
+    created = models.DateTimeField("Дата добавления", auto_now_add=True, db_index=True)
