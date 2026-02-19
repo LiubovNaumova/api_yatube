@@ -12,3 +12,4 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
         # Разрешить запись только автору объекта
         return obj.author == request.user
     
+

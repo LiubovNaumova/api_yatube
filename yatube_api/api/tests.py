@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from .models import Post, Group
+from posts.models import Post, Group
 
 User = get_user_model()
 
@@ -32,4 +32,6 @@ class PostModelTest(TestCase):
         """Проверяем создание группы."""
         self.assertEqual(self.group.slug, 'test-group')
         self.assertEqual(str(self.group), 'Тестовая группа')
+
+
 
