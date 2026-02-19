@@ -9,7 +9,7 @@ class Group(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField()
 
-    def __str__(self):
+    def str(self):
         return self.title
 
 
@@ -32,7 +32,7 @@ class Post(models.Model):
         null=True,
     )
 
-    def __str__(self):
+    def str(self):
         return self.text
 
 
@@ -44,7 +44,14 @@ class Comment(models.Model):
         related_query_name="posts_comment",
     )
     post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="posts_comments"
+        Post,
+        on_delete=models.CASCADE,
+        related_name="posts_comments",
     )
     text = models.TextField()
-    created = models.DateTimeField("Дата добавления", auto_now_add=True, db_index=True)
+    created = models.DateTimeField(
+        "Дата добавления",
+        auto_now_add=True,
+        db_index=True,
+    )
+    
