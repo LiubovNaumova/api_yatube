@@ -9,7 +9,11 @@ class PostModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Создаём тестового пользователя и группу
-        cls.user = User.objects.create_user(username='testuser', password='12345')
+        cls.user = User.objects.create_user(
+            username='testuser',
+            password='12345'
+        )
+        
         cls.group = Group.objects.create(
             title='Тестовая группа',
             slug='test-group',
@@ -32,6 +36,4 @@ class PostModelTest(TestCase):
         """Проверяем создание группы."""
         self.assertEqual(self.group.slug, 'test-group')
         self.assertEqual(str(self.group), 'Тестовая группа')
-
-
-
+ 

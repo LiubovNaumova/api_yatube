@@ -115,4 +115,4 @@ REST_FRAMEWORK = {
         'api.permissions.IsAuthorOrReadOnly',
     ]
 }
-
+ 
