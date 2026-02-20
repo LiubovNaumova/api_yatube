@@ -3,10 +3,10 @@ from rest_framework import permissions
 
 class IsAuthorOrReadOnly(permissions.BasePermission):
     """
-    Разрешение на уровне объекта:
-    - безопасные методы (GET, HEAD, OPTIONS) разрешены (но доступ к API всё равно
-      ограничен IsAuthenticated глобально/на вьюсете)
-    - изменять/удалять может только автор.
+    Разрешение на уровне объекта.
+
+    Безопасные методы (GET, HEAD, OPTIONS) разрешены.
+    Изменять и удалять объект может только автор.
     """
 
     def has_object_permission(self, request, view, obj):

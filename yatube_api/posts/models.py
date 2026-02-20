@@ -9,44 +9,51 @@ class Group(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField()
 
-    def __str__(self):  # Исправлено: добавлены двойные подчеркивания
+    def str(self):
         return self.title
 
 
 class Post(models.Model):
     text = models.TextField()
-    pub_date = models.DateTimeField("Дата публикации", auto_now_add=True)
+    pub_date = models.DateTimeField(
+        "Дата публикации",
+        auto_now_add=True,
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="posts",  # Исправлено: упрощено имя
+        related_name="posts",
         related_query_name="post",
     )
-    image = models.ImageField(upload_to="posts/", null=True, blank=True)
+    image = models.ImageField(
+        upload_to="posts/",
+        null=True,
+        blank=True,
+    )
     group = models.ForeignKey(
         Group,
         on_delete=models.SET_NULL,
-        related_name="posts",  # Исправлено: упрощено имя
+        related_name="posts",
         related_query_name="post",
         blank=True,
         null=True,
     )
 
-    def __str__(self):  # Исправлено: добавлены двойные подчеркивания
-        return self.text[:50]  # Возвращаем только первые 50 символов для удобства
+    def str(self):
+        return self.text[:50]
 
 
 class Comment(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="comments",  # Исправлено: упрощено имя
+        related_name="comments",
         related_query_name="comment",
     )
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
-        related_name="comments",  # Исправлено: упрощено имя
+        related_name="comments",
     )
     text = models.TextField()
     created = models.DateTimeField(
@@ -54,6 +61,6 @@ class Comment(models.Model):
         auto_now_add=True,
         db_index=True,
     )
-    
-    def __str__(self):  # Добавлен метод __str__ для модели Comment
-        return self.text[:50]  # Возвращаем только первые 50 символов
+
+    def str(self):
+        return self.text[:50]
