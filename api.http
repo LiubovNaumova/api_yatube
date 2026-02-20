@@ -1,0 +1,42 @@
+### 1. Получить токен
+POST http://127.0.0.1:8000/api/v1/api-token-auth/
+Content-Type: application/json
+
+{
+    "username": "Есения",
+    "password": "EA123"
+}
+
+### Сохраните полученный токен в переменную @token
+@token = вfae2c5a7b20c695b90c7620a627f3dc371babfa0
+
+### 2. Создать новый пост
+POST http://127.0.0.1:8000/api/v1/posts/
+Authorization: Token fae2c5a7b20c695b90c7620a627f3dc371babfa0
+Content-Type: application/json
+
+{
+    "text": "Мой первый пост через REST Client!",
+    "group": 1
+}
+
+### 3. Получить список постов
+GET http://127.0.0.1:8000/api/v1/posts/
+Authorization: Token fae2c5a7b20c695b90c7620a627f3dc371babfa0
+
+### 4. Получить конкретный пост (замените 1 на нужный id)
+GET http://127.0.0.1:8000/api/v1/posts/1/
+Authorization: Token fae2c5a7b20c695b90c7620a627f3dc371babfa0
+
+### 5. Создать комментарий к посту 1
+POST http://127.0.0.1:8000/api/v1/posts/1/comments/
+Authorization: fae2c5a7b20c695b90c7620a627f3dc371babfa0
+Content-Type: application/json
+
+{
+    "text": "Отличный пост!"
+}
+
+### 6. Получить список групп
+GET http://127.0.0.1:8000/api/v1/groups/
+Authorization: Token fae2c5a7b20c695b90c7620a627f3dc371babfa0
