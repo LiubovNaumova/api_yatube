@@ -36,4 +36,3 @@ class PostModelTest(TestCase):
         """Проверяем создание группы."""
         self.assertEqual(self.group.slug, "test-group")
         self.assertEqual(str(self.group), "Тестовая группа")
-        
