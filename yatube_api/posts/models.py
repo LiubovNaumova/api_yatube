@@ -9,7 +9,7 @@ class Group(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField()
 
-    def str(self):
+    def __str__(self):  # Исправлено: добавлены двойные подчеркивания
         return self.title
 
 
@@ -19,34 +19,34 @@ class Post(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="posts_posts",
-        related_query_name="posts_post",
+        related_name="posts",  # Исправлено: упрощено имя
+        related_query_name="post",
     )
     image = models.ImageField(upload_to="posts/", null=True, blank=True)
     group = models.ForeignKey(
         Group,
         on_delete=models.SET_NULL,
-        related_name="posts_group_posts",
-        related_query_name="posts_group_post",
+        related_name="posts",  # Исправлено: упрощено имя
+        related_query_name="post",
         blank=True,
         null=True,
     )
 
-    def str(self):
-        return self.text
+    def __str__(self):  # Исправлено: добавлены двойные подчеркивания
+        return self.text[:50]  # Возвращаем только первые 50 символов для удобства
 
 
 class Comment(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="posts_comments",
-        related_query_name="posts_comment",
+        related_name="comments",  # Исправлено: упрощено имя
+        related_query_name="comment",
     )
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
-        related_name="posts_comments",
+        related_name="comments",  # Исправлено: упрощено имя
     )
     text = models.TextField()
     created = models.DateTimeField(
@@ -54,3 +54,6 @@ class Comment(models.Model):
         auto_now_add=True,
         db_index=True,
     )
+    
+    def __str__(self):  # Добавлен метод __str__ для модели Comment
+        return self.text[:50]  # Возвращаем только первые 50 символов
