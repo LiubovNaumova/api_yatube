@@ -9,7 +9,7 @@ class Group(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField()
 
-    def str(self):
+    def __str__(self):
         return self.title
 
 
@@ -39,7 +39,7 @@ class Post(models.Model):
         null=True,
     )
 
-    def str(self):
+    def __str__(self):
         return self.text[:50]
 
 
@@ -62,5 +62,5 @@ class Comment(models.Model):
         db_index=True,
     )
 
-    def str(self):
+    def __str__(self):
         return self.text[:50]

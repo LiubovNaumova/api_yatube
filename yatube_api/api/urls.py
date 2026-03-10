@@ -4,28 +4,21 @@ from rest_framework.routers import DefaultRouter
 
 from .views import CommentViewSet, GroupViewSet, PostViewSet
 
-
 router = DefaultRouter()
 router.register("posts", PostViewSet, basename="posts")
 router.register("groups", GroupViewSet, basename="groups")
 
+comment_list = CommentViewSet.as_view({
+    "get": "list",
+    "post": "create",
+})
 
-comment_list = CommentViewSet.as_view(
-    {
-        "get": "list",
-        "post": "create",
-    }
-)
-
-comment_detail = CommentViewSet.as_view(
-    {
-        "get": "retrieve",
-        "put": "update",
-        "patch": "partial_update",
-        "delete": "destroy",
-    }
-)
-
+comment_detail = CommentViewSet.as_view({
+    "get": "retrieve",
+    "put": "update",
+    "patch": "partial_update",
+    "delete": "destroy",
+})
 
 urlpatterns = [
     path(
