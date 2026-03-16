@@ -1,15 +1,31 @@
 from django.contrib import admin
-
-from .models import Comment, Group, Post
-
-
+ 
+from .models import Comment, Follow, Group, Post
+ 
+ 
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'title', 'slug')
+    search_fields = ('title',)
+    prepopulated_fields = {'slug': ('title',)}
+ 
+ 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("pk", "text", "pub_date", "author")
-    search_fields = ("text",)
-    list_filter = ("pub_date",)
-    empty_value_display = "-пусто-"
-
-
-admin.site.register(Post, PostAdmin)
-admin.site.register(Group)
-admin.site.register(Comment)
+    list_display = ('pk', 'text', 'author', 'group', 'pub_date')
+    search_fields = ('text',)
+    list_filter = ('pub_date', 'author', 'group')
+    empty_value_display = '-пусто-'
+ 
+ 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'text', 'author', 'post', 'created')
+    search_fields = ('text',)
+    list_filter = ('created', 'author')
+ 
+ 
+@admin.register(Follow)
+class FollowAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'user', 'following')
+    search_fields = ('user__username', 'following__username')
